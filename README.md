@@ -257,3 +257,8 @@ cd backend && npm run build && npm start
 # Frontend
 cd frontend && npm run build && npm start
 ```
+## Screenshots
+
+![Home Page](screenshots/home.png)
+
+![Login Page](screenshots/login.png)
