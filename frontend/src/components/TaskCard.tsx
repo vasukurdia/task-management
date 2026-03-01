@@ -42,8 +42,8 @@ export default function TaskCard({ task, onEdit, onDelete, onToggle }: any) {
             task.status === 'COMPLETED'
               ? 'border-green-500 bg-green-500'
               : task.status === 'IN_PROGRESS'
-              ? 'border-blue-500 bg-blue-100'
-              : 'border-gray-300 hover:border-blue-400'
+                ? 'border-blue-500 bg-blue-100'
+                : 'border-gray-300 hover:border-blue-400'
           )}
         >
           <span className="absolute inset-0 rounded-full animate-ripple pointer-events-none" />
@@ -78,7 +78,7 @@ export default function TaskCard({ task, onEdit, onDelete, onToggle }: any) {
             <div ref={menuRef} className="relative flex-shrink-0">
               <button
                 onClick={() => setMenuOpen(!menuOpen)}
-                className="p-1.5 rounded-md text-gray-600 hover:text-gray-800 hover:bg-gray-100 active:scale-95 transition" 
+                className="p-1.5 rounded-md text-gray-600 hover:text-gray-800 hover:bg-gray-100 active:scale-95 transition"
               >
                 <MoreVertical className="w-4 h-4" />
               </button>

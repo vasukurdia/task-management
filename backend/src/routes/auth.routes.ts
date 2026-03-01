@@ -1,4 +1,3 @@
-// src/routes/auth.routes.ts
 import { Router } from 'express';
 import { body } from 'express-validator';
 import { register, login, refresh, logout, getMe } from '../controllers/auth.controller';

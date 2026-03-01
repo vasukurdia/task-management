@@ -1,4 +1,3 @@
-// src/app/(dashboard)/dashboard/page.tsx
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
@@ -36,7 +35,6 @@ export default function DashboardPage() {
   const [editTask, setEditTask] = useState<Task | null>(null);
   const [deleteId, setDeleteId] = useState<string | null>(null);
 
-  // Stats
   const [stats, setStats] = useState({ total: 0, pending: 0, inProgress: 0, completed: 0 });
 
   const fetchTasks = useCallback(async () => {
@@ -66,7 +64,7 @@ export default function DashboardPage() {
         inProgress: inProgress.pagination.total,
         completed: completed.pagination.total,
       });
-    } catch {}
+    } catch { }
   }, []);
 
   useEffect(() => {
@@ -77,7 +75,6 @@ export default function DashboardPage() {
     fetchStats();
   }, [fetchStats]);
 
-  // Debounce search
   useEffect(() => {
     const timer = setTimeout(() => {
       setFilters((prev) => ({ ...prev, search: searchInput || undefined, page: 1 }));
@@ -154,184 +151,184 @@ export default function DashboardPage() {
   ];
 
   return (
-  <div className="min-h-screen bg-gradient-to-br from-blue-300 to-indigo-200 p-4">
-    <div className="max-w-7xl mx-auto">
+    <div className="min-h-screen bg-gradient-to-br from-blue-300 to-indigo-200 p-4">
+      <div className="max-w-7xl mx-auto">
 
-      {/* Header */}
-      <div className="mb-10 transition-all">
-        <h1 className="text-3xl font-bold text-gray-900 drop-shadow-sm">
-          Good{" "}
-          {new Date().getHours() < 12
-            ? "morning"
-            : new Date().getHours() < 17
-            ? "afternoon"
-            : "evening"}
-          , {user?.name?.split(" ")[0]} 👋
-        </h1>
-        <p className="text-gray-800 mt-1 text-sm font-medium">
-          Here's a quick overview of your productivity today.
-        </p>
-      </div>
-
-      {/* Stats */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-10">
-        {statCards.map((s) => (
-          <div
-            key={s.label}
-            className={`p-4 rounded-xl border shadow-md bg-white/80 backdrop-blur hover:scale-[1.02] hover:shadow-lg transition cursor-pointer ${s.border}`}
-          >
-            <p className="text-xs text-gray-600 font-semibold">{s.label}</p>
-            <p className="text-3xl font-bold mt-1">{s.value}</p>
-          </div>
-        ))}
-      </div>
-
-      {/* Toolbar */}
-      <div className="flex flex-col sm:flex-row gap-3 mb-8">
-
-        {/* Search */}
-        <div className="relative flex-1">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
-          <input
-            type="text"
-            placeholder="Search tasks..."
-            value={searchInput}
-            onChange={(e) => setSearchInput(e.target.value)}
-            className="pl-11 pr-4 py-2 w-full bg-white/80 backdrop-blur border rounded-xl shadow-sm focus:ring-2 focus:ring-blue-500 transition text-gray-700"
-          />
-        </div>
-
-        {/* Filters */}
-        <div className="flex gap-2 items-center">
-          <Filter className="w-5 h-5 text-gray-600" />
-
-          <select
-            value={filters.status || ""}
-            onChange={(e) => handleFilterChange("status", e.target.value)}
-            className="px-3 py-2 bg-white/80 backdrop-blur border rounded-xl text-sm shadow-sm focus:ring-2 focus:ring-blue-500 transition"
-          >
-            <option value="">All Status</option>
-            <option value="PENDING">Pending</option>
-            <option value="IN_PROGRESS">In Progress</option>
-            <option value="COMPLETED">Completed</option>
-          </select>
-
-          <select
-            value={filters.priority || ""}
-            onChange={(e) => handleFilterChange("priority", e.target.value)}
-            className="px-3 py-2 bg-white/80 backdrop-blur border rounded-xl text-sm shadow-sm focus:ring-2 focus:ring-blue-500 transition"
-          >
-            <option value="">All Priority</option>
-            <option value="LOW">Low</option>
-            <option value="MEDIUM">Medium</option>
-            <option value="HIGH">High</option>
-          </select>
-        </div>
-
-        {/* New Task Button */}
-        <button
-          onClick={() => { setEditTask(null); setModalOpen(true); }}
-          className="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 transition shadow text-white font-medium flex items-center gap-2"
-        >
-          <Plus className="w-4 h-4" />
-          New Task
-        </button>
-      </div>
-
-      {/* Tasks */}
-      {loading ? (
-        <div className="flex justify-center items-center py-16">
-          <Loader2 className="w-10 h-10 animate-spin text-white drop-shadow-lg" />
-        </div>
-      ) : tasks.length === 0 ? (
-        <div className="flex flex-col items-center justify-center py-16">
-          <div className="w-20 h-20 bg-white/60 rounded-3xl shadow flex items-center justify-center mb-4">
-            <ClipboardList className="w-10 h-10 text-gray-600" />
-          </div>
-          <h3 className="text-lg font-semibold text-gray-900">No tasks found</h3>
-          <p className="text-gray-700 text-sm mt-1">
-            {filters.search || filters.status || filters.priority
-              ? "Try adjusting your filters"
-              : "Start by creating your first task!"}
+        {/* Header */}
+        <div className="mb-10 transition-all">
+          <h1 className="text-3xl font-bold text-gray-900 drop-shadow-sm">
+            Good{" "}
+            {new Date().getHours() < 12
+              ? "morning"
+              : new Date().getHours() < 17
+                ? "afternoon"
+                : "evening"}
+            , {user?.name?.split(" ")[0]} 👋
+          </h1>
+          <p className="text-gray-800 mt-1 text-sm font-medium">
+            Here's a quick overview of your productivity today.
           </p>
-
-          {!filters.search && !filters.status && !filters.priority && (
-            <button
-              onClick={() => setModalOpen(true)}
-              className="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-xl text-white mt-4 transition shadow"
-            >
-              <Plus className="w-4 h-4 inline-block" /> Create Task
-            </button>
-          )}
         </div>
-      ) : (
-        <>
-          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5">
-            {tasks.map((task) => (
-              <TaskCard
-                key={task.id}
-                task={task}
-                onEdit={(t: Task) => { setEditTask(t); setModalOpen(true); }}
-                onDelete={(id: string) => setDeleteId(id)}
-                onToggle={handleToggle}
-              />
-            ))}
+
+        {/* Stats */}
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-10">
+          {statCards.map((s) => (
+            <div
+              key={s.label}
+              className={`p-4 rounded-xl border shadow-md bg-white/80 backdrop-blur hover:scale-[1.02] hover:shadow-lg transition cursor-pointer ${s.border}`}
+            >
+              <p className="text-xs text-gray-600 font-semibold">{s.label}</p>
+              <p className="text-3xl font-bold mt-1">{s.value}</p>
+            </div>
+          ))}
+        </div>
+
+        {/* Toolbar */}
+        <div className="flex flex-col sm:flex-row gap-3 mb-8">
+
+          {/* Search */}
+          <div className="relative flex-1">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
+            <input
+              type="text"
+              placeholder="Search tasks..."
+              value={searchInput}
+              onChange={(e) => setSearchInput(e.target.value)}
+              className="pl-11 pr-4 py-2 w-full bg-white/80 backdrop-blur border rounded-xl shadow-sm focus:ring-2 focus:ring-blue-500 transition text-gray-700"
+            />
           </div>
 
-          {/* Pagination */}
-          {pagination && pagination.totalPages > 1 && (
-            <div className="flex items-center justify-between mt-8">
-              <p className="text-sm text-gray-800 font-medium">
-                Showing {(pagination.page - 1) * pagination.limit + 1}–
-                {Math.min(pagination.page * pagination.limit, pagination.total)} of{" "}
-                {pagination.total}
-              </p>
+          {/* Filters */}
+          <div className="flex gap-2 items-center">
+            <Filter className="w-5 h-5 text-gray-600" />
 
-              <div className="flex gap-2">
-                <button
-                  onClick={() => setFilters((p) => ({ ...p, page: p.page! - 1 }))}
-                  disabled={pagination.page <= 1}
-                  className="px-3 py-2 bg-white/70 backdrop-blur border rounded-xl shadow hover:bg-white transition disabled:opacity-50"
-                >
-                  <ChevronLeft className="w-4 h-4" />
-                </button>
+            <select
+              value={filters.status || ""}
+              onChange={(e) => handleFilterChange("status", e.target.value)}
+              className="px-3 py-2 bg-white/80 backdrop-blur border rounded-xl text-sm shadow-sm focus:ring-2 focus:ring-blue-500 transition"
+            >
+              <option value="">All Status</option>
+              <option value="PENDING">Pending</option>
+              <option value="IN_PROGRESS">In Progress</option>
+              <option value="COMPLETED">Completed</option>
+            </select>
 
-                <span className="text-gray-900 font-medium px-3 py-2">
-                  {pagination.page} / {pagination.totalPages}
-                </span>
+            <select
+              value={filters.priority || ""}
+              onChange={(e) => handleFilterChange("priority", e.target.value)}
+              className="px-3 py-2 bg-white/80 backdrop-blur border rounded-xl text-sm shadow-sm focus:ring-2 focus:ring-blue-500 transition"
+            >
+              <option value="">All Priority</option>
+              <option value="LOW">Low</option>
+              <option value="MEDIUM">Medium</option>
+              <option value="HIGH">High</option>
+            </select>
+          </div>
 
-                <button
-                  onClick={() => setFilters((p) => ({ ...p, page: p.page! + 1 }))}
-                  disabled={pagination.page >= pagination.totalPages}
-                  className="px-3 py-2 bg-white/70 backdrop-blur border rounded-xl shadow hover:bg-white transition disabled:opacity-50"
-                >
-                  <ChevronRight className="w-4 h-4" />
-                </button>
-              </div>
+          {/* New Task Button */}
+          <button
+            onClick={() => { setEditTask(null); setModalOpen(true); }}
+            className="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 transition shadow text-white font-medium flex items-center gap-2"
+          >
+            <Plus className="w-4 h-4" />
+            New Task
+          </button>
+        </div>
+
+        {/* Tasks */}
+        {loading ? (
+          <div className="flex justify-center items-center py-16">
+            <Loader2 className="w-10 h-10 animate-spin text-white drop-shadow-lg" />
+          </div>
+        ) : tasks.length === 0 ? (
+          <div className="flex flex-col items-center justify-center py-16">
+            <div className="w-20 h-20 bg-white/60 rounded-3xl shadow flex items-center justify-center mb-4">
+              <ClipboardList className="w-10 h-10 text-gray-600" />
             </div>
-          )}
-        </>
-      )}
+            <h3 className="text-lg font-semibold text-gray-900">No tasks found</h3>
+            <p className="text-gray-700 text-sm mt-1">
+              {filters.search || filters.status || filters.priority
+                ? "Try adjusting your filters"
+                : "Start by creating your first task!"}
+            </p>
 
-      {/* Modals */}
-      {modalOpen && (
-        <TaskModal
-          task={editTask}
-          onClose={() => { setModalOpen(false); setEditTask(null); }}
-          onSave={editTask ? handleUpdate : handleCreate}
-          loading={actionLoading}
-        />
-      )}
+            {!filters.search && !filters.status && !filters.priority && (
+              <button
+                onClick={() => setModalOpen(true)}
+                className="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-xl text-white mt-4 transition shadow"
+              >
+                <Plus className="w-4 h-4 inline-block" /> Create Task
+              </button>
+            )}
+          </div>
+        ) : (
+          <>
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5">
+              {tasks.map((task) => (
+                <TaskCard
+                  key={task.id}
+                  task={task}
+                  onEdit={(t: Task) => { setEditTask(t); setModalOpen(true); }}
+                  onDelete={(id: string) => setDeleteId(id)}
+                  onToggle={handleToggle}
+                />
+              ))}
+            </div>
 
-      {deleteId && (
-        <DeleteModal
-          onConfirm={handleDelete}
-          onClose={() => setDeleteId(null)}
-          loading={actionLoading}
-        />
-      )}
+            {/* Pagination */}
+            {pagination && pagination.totalPages > 1 && (
+              <div className="flex items-center justify-between mt-8">
+                <p className="text-sm text-gray-800 font-medium">
+                  Showing {(pagination.page - 1) * pagination.limit + 1}–
+                  {Math.min(pagination.page * pagination.limit, pagination.total)} of{" "}
+                  {pagination.total}
+                </p>
 
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => setFilters((p) => ({ ...p, page: p.page! - 1 }))}
+                    disabled={pagination.page <= 1}
+                    className="px-3 py-2 bg-white/70 backdrop-blur border rounded-xl shadow hover:bg-white transition disabled:opacity-50"
+                  >
+                    <ChevronLeft className="w-4 h-4" />
+                  </button>
+
+                  <span className="text-gray-900 font-medium px-3 py-2">
+                    {pagination.page} / {pagination.totalPages}
+                  </span>
+
+                  <button
+                    onClick={() => setFilters((p) => ({ ...p, page: p.page! + 1 }))}
+                    disabled={pagination.page >= pagination.totalPages}
+                    className="px-3 py-2 bg-white/70 backdrop-blur border rounded-xl shadow hover:bg-white transition disabled:opacity-50"
+                  >
+                    <ChevronRight className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+            )}
+          </>
+        )}
+
+        {/* Modals */}
+        {modalOpen && (
+          <TaskModal
+            task={editTask}
+            onClose={() => { setModalOpen(false); setEditTask(null); }}
+            onSave={editTask ? handleUpdate : handleCreate}
+            loading={actionLoading}
+          />
+        )}
+
+        {deleteId && (
+          <DeleteModal
+            onConfirm={handleDelete}
+            onClose={() => setDeleteId(null)}
+            loading={actionLoading}
+          />
+        )}
+
+      </div>
     </div>
-  </div>
-);
+  );
 }

@@ -1,4 +1,3 @@
-// src/controllers/task.controller.ts
 import { Response, NextFunction } from 'express';
 import { prisma } from '../lib/prisma';
 import { AppError } from '../middleware/error.middleware';

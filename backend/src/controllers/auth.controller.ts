@@ -1,4 +1,3 @@
-// src/controllers/auth.controller.ts
 import { Request, Response, NextFunction } from 'express';
 import bcrypt from 'bcryptjs';
 import { prisma } from '../lib/prisma';
@@ -77,7 +76,6 @@ export const refresh = async (req: Request, res: Response, next: NextFunction): 
 
     const tokenRecord = await verifyRefreshToken(refreshToken);
 
-    // Delete old refresh token (rotation)
     await deleteRefreshToken(refreshToken);
 
     const accessToken = generateAccessToken({
