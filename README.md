@@ -158,29 +158,6 @@ Frontend runs at: **http://localhost:3000**
 | POST | `/auth/logout` | No | Invalidate refresh token |
 | GET | `/auth/me` | Yes | Get current user |
 
-**Register / Login body:**
-```json
-{
-  "name": "Jane Doe",      // only for register
-  "email": "jane@example.com",
-  "password": "secret123"
-}
-```
-
-**Response:**
-```json
-{
-  "accessToken": "eyJ...",
-  "refreshToken": "uuid-v4-token",
-  "user": { "id": "...", "name": "Jane Doe", "email": "jane@example.com" }
-}
-```
-
-**Refresh body:**
-```json
-{ "refreshToken": "uuid-v4-token" }
-```
-
 ---
 
 ### Tasks (`/tasks`) — All require `Authorization: Bearer <accessToken>`
