@@ -10,7 +10,6 @@ export default function TaskCard({ task, onEdit, onDelete, onToggle }: any) {
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
-  // Close menu on outside click
   useEffect(() => {
     const handleClick = (e: MouseEvent) => {
       if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
@@ -21,8 +20,9 @@ export default function TaskCard({ task, onEdit, onDelete, onToggle }: any) {
     return () => document.removeEventListener('mousedown', handleClick);
   }, []);
 
-const status = statusConfig[task.status as keyof typeof statusConfig];
-const priority = priorityConfig[task.priority as keyof typeof priorityConfig];
+  const status = statusConfig[task.status as keyof typeof statusConfig];
+  const priority = priorityConfig[task.priority as keyof typeof priorityConfig];
+
   return (
     <div
       className={cn(
@@ -46,7 +46,6 @@ const priority = priorityConfig[task.priority as keyof typeof priorityConfig];
               : 'border-gray-300 hover:border-blue-400'
           )}
         >
-          {/* Ripple inside checkbox */}
           <span className="absolute inset-0 rounded-full animate-ripple pointer-events-none" />
 
           {task.status === 'COMPLETED' && (
@@ -79,12 +78,11 @@ const priority = priorityConfig[task.priority as keyof typeof priorityConfig];
             <div ref={menuRef} className="relative flex-shrink-0">
               <button
                 onClick={() => setMenuOpen(!menuOpen)}
-                className="p-1.5 rounded-md text-gray-400 hover:text-gray-700 hover:bg-gray-100 active:scale-95 transition"
+                className="p-1.5 rounded-md text-gray-600 hover:text-gray-800 hover:bg-gray-100 active:scale-95 transition" 
               >
                 <MoreVertical className="w-4 h-4" />
               </button>
 
-              {/* Dropdown */}
               {menuOpen && (
                 <div
                   className="absolute right-0 top-7 bg-white border border-gray-200 rounded-lg shadow-xl z-20 
@@ -127,14 +125,12 @@ const priority = priorityConfig[task.priority as keyof typeof priorityConfig];
             </div>
           </div>
 
-          {/* Description */}
           {task.description && (
             <p className="text-xs text-gray-500 mt-1 line-clamp-2 animate-fadeIn">
               {task.description}
             </p>
           )}
 
-          {/* Tags */}
           <div className="flex flex-wrap items-center gap-2 mt-3">
             <span
               className={cn(
@@ -157,12 +153,13 @@ const priority = priorityConfig[task.priority as keyof typeof priorityConfig];
             </span>
 
             {task.dueDate && (
-              <span className="flex items-center gap-1 text-xs text-gray-400 animate-fadeIn delay-150">
+              <span className="flex items-center gap-1 text-xs text-gray-600 animate-fadeIn delay-150">
                 <Calendar className="w-3 h-3" />
                 {formatDate(task.dueDate)}
               </span>
             )}
           </div>
+
         </div>
       </div>
     </div>
