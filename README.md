@@ -259,6 +259,14 @@ cd frontend && npm run build && npm start
 ```
 ## Screenshots
 
-![Home Page](screenshots/home.png)
+### Signup Page
+![Signup Page](screenshots/Signup-page.png)
 
-![Login Page](screenshots/login.png)
+### Login Page
+![Login Page](screenshots/Login-page.jpg)
+
+### Dashboard
+![Dashboard](screenshots/Dashboard.jpg)
+
+### New Task Card
+![New Task Card](screenshots/new-task-card.jpg)
